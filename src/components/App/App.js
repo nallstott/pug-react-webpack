@@ -31,24 +31,27 @@ class App extends React.Component {
 		setTimeout(() => {
 			const startGame = document.querySelector(".start-game");
 			if (this.state.numPlayers && this.state.numDecks) {
-				console.log("oh boy");
 				startGame.classList.add("game-ready");
 			}
 		}, 1000);
 	}
 
 	startGame() {
-		this.setState({ gameReady: true });
-		const selections = document.querySelector(".selections");
-		const startGame = document.querySelector(".start-game");
-		selections.style.opacity = "0";
-		startGame.style.opacity = "0";
-		selections.style.pointerEvents = "none";
-		startGame.style.pointerEvents = "none";
-		setTimeout(() => (selections.style.display = "none"), 1000);
-		setTimeout(() => (startGame.style.display = "none"), 1000);
-		const game = document.querySelector(".game");
-		setTimeout(() => game.classList.add("game-active"), 1000);
+		if (this.state.numPlayers > 0 && this.state.numDecks > 0) {
+			this.setState({ gameReady: true });
+			const selections = document.querySelector(".selections");
+			const startGame = document.querySelector(".start-game");
+			selections.style.opacity = "0";
+			startGame.style.opacity = "0";
+			selections.style.pointerEvents = "none";
+			startGame.style.pointerEvents = "none";
+			setTimeout(() => (selections.style.display = "none"), 1000);
+			setTimeout(() => (startGame.style.display = "none"), 1000);
+			const game = document.querySelector(".game");
+			setTimeout(() => game.classList.add("game-active"), 1000);
+		} else {
+			alert("Please select players and decks");
+		}
 	}
 
 	render() {
@@ -74,7 +77,7 @@ class App extends React.Component {
 							<h2>Create Game</h2>
 						</div>
 					</div>
-					<Game players={this.state.numPlayers} decks={this.state.numDecks} />
+					<Game players={this.state.numPlayers} decks={this.state.numDecks} gameReady={this.state.gameReady} />
 				</div>
 			</div>
 		);

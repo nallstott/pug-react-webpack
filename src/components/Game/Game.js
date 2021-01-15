@@ -13,7 +13,7 @@ class Game extends React.Component {
 			playerTwoCount: 0,
 			playerThreeCount: 0,
 			playerFourCount: 0,
-			activePlayer: 1,
+			activePlayer: 0,
 			gameDeck: null,
 			results: {},
 		};
@@ -53,7 +53,7 @@ class Game extends React.Component {
 		} else if (this.state.gameDeck.length == 0) {
 			document.querySelector(".draw-card").style.display = "none";
 			document.querySelector(".reset-game").style.display = "inline-block";
-			console.log("game over");
+			// console.log("game over");
 		}
 	}
 
@@ -146,33 +146,26 @@ class Game extends React.Component {
 				switch (winningScore) {
 					case this.state.playerOneCount:
 						winner = "Player 1";
-						// console.log(endGameDivH5);
-						// endGameDivH5[0].classList.add("winner");
 						this.setState({ winner: 1 });
 						break;
 					case this.state.playerTwoCount:
 						winner = "Player 2";
-						// console.log(endGameDivH5);
-						// endGameDivH5[1].classList.add("winner");
 						this.setState({ winner: 2 });
 						break;
 					case this.state.playerThreeCount:
 						winner = "Player 3";
-						// console.log(endGameDivH5);
-						// endGameDivH5[2].classList.add("winner");
+
 						this.setState({ winner: 3 });
 						break;
 					case this.state.playerFourCount:
 						winner = "Player 4";
-						// console.log(endGameDivH5);
-						// endGameDivH5[3].classList.add("winner");
 						this.setState({ winner: 4 });
 						break;
 					default:
 						winner = "mistake";
 						break;
 				}
-				currentCardDiv.innerHTML = `<div class="result"><h3>The winner is ${winner}<br><br>${winningScore}</h3></div>`;
+				currentCardDiv.innerHTML = `<div class="result"><h3>The winner is<br>${winner}<br><br>Pushups: ${winningScore}</h3></div>`;
 				return;
 			}
 		}
@@ -196,7 +189,7 @@ class Game extends React.Component {
 			}
 			gameDeck: prevState.gameDeck.splice(randomCard02Index - difference, 1);
 		});
-		console.log(this.state.gameDeck.length);
+		// console.log(this.state.gameDeck.length);
 
 		//Advance active player
 		const players = document.querySelectorAll(".player");
@@ -268,6 +261,18 @@ class Game extends React.Component {
 		document.location.reload();
 	}
 
+	componentDidUpdate() {
+		setTimeout(() => {
+			if (this.props.gameReady && !this.state.gameLaunched) {
+				this.setState({ gameLaunched: true });
+				this.nextTurn();
+				if (this.props.players > 1) {
+					this.setState({ activePlayer: 2 });
+				}
+			}
+		}, 500);
+	}
+
 	render() {
 		return (
 			<div className="game">
@@ -276,8 +281,8 @@ class Game extends React.Component {
 					<div className="currentTurnCount"></div>
 				</div>
 				<div className="progress-game">
-					<img src="src/components/Deck/card-images/Draw Btn.jpg" onClick={this.nextTurn} className="draw-card" />
-					<img src="src/components/Deck/card-images/new_game.jpg" onClick={this.refreshPage} className="reset-game" />
+					<img src="src/images/card-images/Draw Btn.jpg" onLoad={this.nextTurn} onClick={this.nextTurn} className="draw-card" />
+					<img src="src/images/card-images/new_game.jpg" onClick={this.refreshPage} className="reset-game" />
 				</div>
 				<Player playerClass="one" player="1" currentCount={this.state.playerOneCount} />
 				<Player playerClass="two" player="2" currentCount={this.state.playerTwoCount} />

@@ -135,6 +135,7 @@ h3 {
 		grid-row-end: 2;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		.cards {
 			@extend %center-center-flexbox;
 			max-height: 60%;
@@ -165,6 +166,17 @@ h3 {
 		// }
 		.reset-game {
 			display: none;
+		}
+	}
+
+	.result {
+		h3 {
+			text-align: center;
+			margin: auto;
+			color: $color-primary;
+			@extend %roboto-condensed-bold-italic;
+			font-size: 30px;
+			line-height: 1;
 		}
 	}
 }
@@ -205,13 +217,14 @@ h3 {
 	}
 	h3 {
 		text-align: center;
+		margin-bottom: 10px;
 	}
 	&.active {
 		color: $color-primary;
 	}
 	.previous-cards {
 		overflow: scroll;
-		max-height: 100%;
+		max-height: 270px;
 		img {
 			max-width: 25%;
 		}
