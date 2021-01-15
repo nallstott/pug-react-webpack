@@ -1,0 +1,274 @@
+@import "./helpers/mixins";
+@import "./helpers/partials";
+@import "./helpers/variables";
+
+@import "./components/animations";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: $color-main-bg;
+}
+
+h1 {
+	@extend %header-font;
+	font-size: 120px;
+	text-transform: uppercase;
+	color: $color-primary;
+	line-height: 1;
+	text-align: center;
+}
+
+h2 {
+	@extend h1;
+	font-size: 60px;
+}
+
+h3 {
+	@extend %roboto-condensed-bold;
+	font-size: 20px;
+}
+
+.body-container {
+	@extend %center-center-flexbox;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+}
+
+.app-container {
+	max-width: 80%;
+	width: 1000px;
+	height: 100%;
+}
+
+.app-header {
+	width: 100%;
+	text-align: center;
+	@extend %center-center-flexbox;
+	flex-wrap: wrap;
+	h1,
+	h4 {
+		width: 100%;
+	}
+	h4 {
+		font-size: 30px;
+		color: $color-primary;
+		@extend %roboto-condensed-bold;
+	}
+	margin: 40px 0 10px 0;
+}
+
+.app-body {
+	height: auto;
+	width: 100%;
+	@extend %center-center-flexbox;
+	padding: 20px 0;
+	flex-direction: column;
+	// background: yellow;
+}
+
+.selection-div {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	cursor: pointer;
+	.option {
+		@extend %header-font;
+		@extend %basic-hover;
+		color: $color-secondary;
+		font-size: 100px;
+		&:hover {
+			color: $color-primary;
+		}
+	}
+	.active {
+		color: $color-primary;
+	}
+}
+
+.selections {
+	height: 120%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	@extend %basic-hover;
+	> div {
+		padding: 20px 0;
+	}
+}
+
+.start-game {
+	opacity: 0;
+	@extend %basic-hover;
+	cursor: pointer;
+}
+
+.game-ready {
+	opacity: 1;
+}
+
+.game {
+	display: none;
+	@extend %basic-hover;
+	opacity: 0;
+}
+
+.game-active {
+	display: grid;
+	opacity: 1;
+	grid-template-rows: 1fr 1fr;
+	grid-template-columns: repeat(3, 1fr);
+	height: 600px;
+	width: 100%;
+	.current-card {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		grid-row-start: 1;
+		grid-row-end: 2;
+		display: flex;
+		flex-direction: column;
+		.cards {
+			@extend %center-center-flexbox;
+			max-height: 60%;
+			width: 100%;
+			img {
+				width: 40%;
+			}
+		}
+		.currentTurnCount {
+			height: 40%;
+			width: 100%;
+			padding: 10%;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			color: $color-primary;
+			font-size: 40px;
+		}
+	}
+	.progress-game {
+		grid-column-start: 2;
+		grid-column-end: 3;
+		grid-row-start: 2;
+		grid-row-end: 2;
+		@extend %center-center-flexbox;
+		cursor: pointer;
+		// .draw-card {
+		// }
+		.reset-game {
+			display: none;
+		}
+	}
+}
+
+.player {
+	color: $color-secondary;
+	padding: 0 20px 20px 20px;
+	max-height: 300px;
+	&.one {
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 1;
+		grid-row-end: 2;
+		// background: blue;
+	}
+	&.two {
+		grid-column-start: 3;
+		grid-column-end: 3;
+		grid-row-start: 1;
+		grid-row-end: 2;
+		// background: yellow;
+	}
+	&.three {
+		padding-top: 20px;
+		grid-column-start: 1;
+		grid-column-end: 2;
+		grid-row-start: 2;
+		grid-row-end: 3;
+		// background: green;
+	}
+	&.four {
+		padding-top: 20px;
+		grid-column-start: 3;
+		grid-column-end: 3;
+		grid-row-start: 2;
+		grid-row-end: 3;
+		// background: orange;
+	}
+	h3 {
+		text-align: center;
+	}
+	&.active {
+		color: $color-primary;
+	}
+	.previous-cards {
+		overflow: scroll;
+		max-height: 100%;
+		img {
+			max-width: 25%;
+		}
+	}
+}
+
+.end-game {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	opacity: 0;
+	@extend %basic-hover;
+	background: $color-main-bg;
+	position: absolute;
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	padding: 0 20%;
+	h4 {
+		@extend %roboto-condensed-bold;
+		font-style: italic;
+		color: $color-primary;
+		font-size: 40px;
+		text-align: center;
+		padding: 40px;
+		padding-top: 0;
+		white-space: nowrap;
+	}
+	h5 {
+		@extend %roboto-condensed-bold;
+		font-style: italic;
+		color: $color-primary;
+		font-size: 30px;
+		text-align: center;
+		opacity: 0;
+		.fill-line {
+			height: 2px;
+			width: 25px;
+			background-color: $color-primary;
+			padding: 0 0 3px 0;
+			display: inline-block;
+		}
+	}
+	.winner {
+		opacity: 1;
+		width: 100px;
+	}
+	player-end-game-div {
+		@extend %center-center-flexbox;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.end-game {
+		padding: 5%;
+	}
+}

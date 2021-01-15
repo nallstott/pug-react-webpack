@@ -1,0 +1,7 @@
+@import "../helpers/mixins";
+@import "../helpers/partials";
+@import "../helpers/variables";
+
+%basic-hover {
+	transition: all 0.5s ease-in-out;
+}
