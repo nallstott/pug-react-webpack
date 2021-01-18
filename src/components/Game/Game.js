@@ -71,7 +71,7 @@ class Game extends React.Component {
 		// 	endGameDiv.appendChild(playerDiv);
 		// 	playerDiv.appendChild(winner);
 		// 	playerDiv.appendChild(player);
-		// }
+		// }]
 		// endGameDiv.style.display = "flex";
 		// endGameDiv.style.opacity = 1;
 		return highestScore;
