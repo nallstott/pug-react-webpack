@@ -280,8 +280,55 @@ h3 {
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 880px) {
+	.app-container {
+		width: 100%;
+		max-width: 100%;
+	}
+
 	.end-game {
 		padding: 5%;
+	}
+
+	.game-active {
+		height: auto;
+		grid-template-rows: 200px 200px;
+	}
+
+	h1 {
+		@extend %header-font;
+		font-size: 80px;
+		text-transform: uppercase;
+		color: $color-primary;
+		line-height: 1;
+		text-align: center;
+	}
+
+	h2 {
+		@extend h1;
+		font-size: 45px;
+	}
+
+	h3 {
+		@extend %roboto-condensed-bold;
+		font-size: 15px;
+	}
+
+	.selection-div {
+		margin-top: 20px;
+		.option {
+			font-size: 45px;
+		}
+	}
+
+	.player {
+		max-height: 40px;
+		.previous-cards {
+			display: none;
+		}
+	}
+
+	.progress-game img {
+		width: 70%;
 	}
 }

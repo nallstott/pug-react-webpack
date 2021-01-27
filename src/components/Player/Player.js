@@ -1,11 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-class Player extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
-	componentDidUpdate() {
+function Player(props) {
+	useEffect(() => {
 		const playerCardDiv = document.querySelectorAll(".previous-cards");
 		playerCardDiv.forEach((div) => {
 			function scrollToBottom() {
@@ -17,18 +13,16 @@ class Player extends React.Component {
 			var config = { childList: true };
 			observer.observe(div, config);
 		});
-	}
+	});
 
-	render() {
-		return (
-			<div className={"player " + this.props.playerClass}>
-				<h3>
-					Player {this.props.player} - {this.props.currentCount}
-				</h3>
-				<div className="previous-cards"></div>
-			</div>
-		);
-	}
+	return (
+		<div className={"player " + props.playerClass}>
+			<h3>
+				Player {props.player} - {props.currentCount}
+			</h3>
+			<div className="previous-cards"></div>
+		</div>
+	);
 }
 
 export default Player;
